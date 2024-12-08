@@ -7,6 +7,8 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -14,6 +16,7 @@
     nix-darwin,
     home-manager,
     nixpkgs,
+    nixvim,
   }: let
     system = "aarch64-darwin";
 
@@ -72,6 +75,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users."pete" = import ./home.nix;
+          home-manager.extraSpecialArgs = {inherit nixvim;};
         }
       ];
     };

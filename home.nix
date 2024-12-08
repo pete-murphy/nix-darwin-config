@@ -2,8 +2,13 @@
   config,
   pkgs,
   lib,
+  nixvim,
   ...
 }: {
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "pete";
@@ -168,11 +173,19 @@
     ];
   };
 
-  programs.neovim = {
+  programs.nixvim = {
     enable = true;
-    # defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    plugins = {
+      lualine.enable = true;
+      vim-surround.enable = true;
+      fzf-lua.enable = true;
+      # telescope.enable = true;
+      # harpoon.enable = true;
+      # harpoon.enableTelescope = true;
+      # web-devicons.enable = true;
+    };
   };
 
   programs.zsh = {
